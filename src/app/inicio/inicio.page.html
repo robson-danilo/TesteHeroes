@@ -1,0 +1,74 @@
+<ion-header>
+    <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel hideToggle expanded="step === 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <b>Cadastrar novo Super Herói</b>
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+                <mat-icon>person_add</mat-icon>
+            </mat-expansion-panel-header>
+            <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+                <mat-form-field style="width: 100% !important;  text-align: center;">
+                    <mat-label>Nome do Herói</mat-label>
+                    <input matInput [(ngModel)]="obj.nome" ngModel>
+                </mat-form-field>
+            </ion-col>
+            <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+                <mat-form-field style="width: 100% !important; text-align: center;">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select [(ngModel)]="obj.categoria" ngModel>
+                        <mat-option style="text-align: center;" *ngFor="let item of categorias " [value]="item.Id"> {{item.Name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </ion-col>
+            <ion-row>
+                <ion-col size="6">
+                    <!-- <ion-button (click)="EnviarDadosHeroi()" size="small" type="submit" fill="outline" shape="block">Sincronizar Herois</ion-button> -->
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button (click)="cadastrar()" size="small" type="submit" fill="outline" shape="block">Cadastrar</ion-button>
+                </ion-col>
+            </ion-row>
+        </mat-expansion-panel>
+    </mat-accordion>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-row>
+        <ion-col size="12">
+            <ion-searchbar primary (keyup)="updateList($event)" show-cancel="false" placeholder="Pesquise pelo nome do Herói">
+            </ion-searchbar>
+            <ngx-datatable class="material" [rowClass]="getRowClass" [columns]="columns" [limit]="9" [rows]="heroes" [rowHeight]="40" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40">
+                <ngx-datatable-column name="Nome">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <div>
+                            {{row.Name}}
+                        </div>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Categoria">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <div *ngFor="let x of categorias">
+                            <div *ngIf="x.Id == row.CategoryId">
+                                {{x.Name}}
+                            </div>
+
+                        </div>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Ativo">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <div>
+                            {{row.Active}}
+                        </div>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </ion-col>
+    </ion-row>
+
+
+</ion-content>

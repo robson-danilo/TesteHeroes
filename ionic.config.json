@@ -1,5 +1,7 @@
 {
   "name": "DesafioHero",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
